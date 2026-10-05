@@ -261,7 +261,27 @@ As the ADMIN user you will import the NATIONALPARKS and INCIDENT schemas in the 
     </copy>
     ```
 
-## Task 6: Import APEX Demo Workspace and Application
+## Task 6: Create a Network ACL for the NATIONALPARKS Schema
+
+As the ADMIN user you will create an ACL for the NATIONALPARKS schema to allow access to image URLs.
+
+1. Run the following script by copying the script below and pasting it into the Database Actions SQL window and click run script:
+
+    ```sql[]
+    <copy>
+    -- Granting network access to the NATIONALPARKS user
+    BEGIN
+      DBMS_NETWORK_ACL_ADMIN.APPEND_HOST_ACE(
+        host => '*',
+        ace => xs$ace_type(privilege_list => xs$name_list('http'),
+                           principal_name => 'NATIONALPARKS',
+                           principal_type => xs_acl.ptype_db));
+    END;
+    /
+    </copy>
+    ```
+
+## Task 7: Import APEX Demo Workspace and Application
 
 In this task you will import the workshop's APEX workspaces and applications:
 
@@ -277,13 +297,13 @@ In this task you will import the workshop's APEX workspaces and applications:
 
     ```[]
     <copy>
-    wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/LRZbkPLpnHd4zLZLo5xHS0xTwGXWLFaFyPD-6CkABY_QHvJOPkIyZrHlrB2gFT08/n/c4u04/b/livelabsfiles/o/apex_natparks_workspace.sql
+    wget https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/apex_natparks_workspace.sql
 
-    wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/tPJpzAsya_op_ROTWARlTILuGYHXCN95QJrzwV8gAMXqx8FNnOU8y8Rb1FwoWWCn/n/c4u04/b/livelabsfiles/o/apex_natparks_f108.sql
+    wget https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/apex_natparks_f108.sql
 
-    wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/JS5lvyF8XTN6VLRL-1rlATyfXCYWEWJJU98vIR0OqiVTgGS7aYwk6qcjXVdqqzwP/n/c4u04/b/livelabsfiles/o/apex_incident_workspace.sql
+    wget https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/apex_incident_workspace.sql
 
-    wget https://objectstorage.us-ashburn-1.oraclecloud.com/p/pNd8hlqGW6gLM4y-Cd-LzAYZdwLnpZodrVQQwgVswcp_xAs9zMPwCaSSlkA_9sZL/n/c4u04/b/livelabsfiles/o/apex_incident_f101.sql
+    wget https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/apex_incident_f101.sql
     </copy>
     ```
 
